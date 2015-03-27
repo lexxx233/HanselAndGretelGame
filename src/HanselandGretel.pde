@@ -12,7 +12,7 @@ Snow[] snow = new Snow[30];
 void setup() {
   frameRate(40);
   size(600, 750);
-  m = new Maze(13, width/2+15, height/2 -20 , 550, 700);
+  m = new Maze(13, width/2+15, height/2 -20, 550, 700);
   m.generateMaze(5, 5, m);
 
   Fisica.init(this);
@@ -44,14 +44,32 @@ void draw() {
     fill(255);
     textSize(30);
     text("press SPACE to begin", width/2, height/4 * 2.95);
-    if(keyPressed){
-      if(key == ' '){
+    if (keyPressed) {
+      if (key == ' ') {
         titleFlag = false;
-      } 
+      }
     }
-    
   }
 
+  if (keyPressed) {
+    character.keyPressed();
+    if (key == ' ') {
+      frameRate(40);
+      size(600, 800);
+
+      m = new Maze(13, width/2+15, height/2 -20, 550, 700);
+      m.generateMaze(5, 5, m);
+
+      Fisica.init(this);
+      world = new FWorld();
+      world.setGravity(0, 600);
+      character = new Player();
+      helper = new Player2();
+      m.compound();
+
+      endFlag = false;
+    }
+  }
   if (!titleFlag) {
     if (!endFlag) {
       background(35);
@@ -65,26 +83,6 @@ void draw() {
       character.update();
       helper.update();
 
-
-      if (keyPressed) {
-        character.keyPressed();
-        if (key == ' ') {
-          frameRate(40);
-          size(600, 800);
-          
-          m = new Maze(13, width/2+15, height/2 -20 , 550, 700);
-          m.generateMaze(5, 5, m);
-
-          Fisica.init(this);
-          world = new FWorld();
-          world.setGravity(0, 600);
-          character = new Player();
-          helper = new Player2();
-          m.compound();
-
-          endFlag = false;
-        }
-      }
       if (mousePressed) {
         helper.mousePressed();
       }
