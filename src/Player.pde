@@ -7,24 +7,18 @@ class Player {
 
   Player() {
     player = new FCircle(30);
-    player.setPosition(width/2-35, height-45);
+    player.setPosition(width/2-35, height-120);
     player.setDamping(0);
     player.setDensity(0.1);
     player.setFriction(100);
     player.setGrabbable(false);
     player.setStrokeWeight(0);
-    player.setFill(230);
+    player.setFill(244, 76, 0);
     HanselandGretel.world.add(player);
   }
 
-  void draw() {
-    fill(100);
-    rect(30, 10, 200*2.75, 12);
-
-    fill(244, 76, 0);
-    noStroke();
-    rect(30, 10, fuel*2.75, 12);
-
+  void update() {
+    player.setFill(244, 76, 0, 255 * (1 - (200 - fuel)/220));
     //Self maintenance fuel depletion
     fuel -= 0.0075;
     fuel = constrain(fuel, 0, 200);    

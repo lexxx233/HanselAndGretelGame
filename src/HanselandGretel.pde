@@ -11,8 +11,8 @@ Snow[] snow = new Snow[30];
 
 void setup() {
   frameRate(40);
-  size(600, 800);
-  m = new Maze(13, width/2+15, height/2+50, 550, 700);
+  size(600, 750);
+  m = new Maze(13, width/2+15, height/2 -20 , 550, 700);
   m.generateMaze(5, 5, m);
 
   Fisica.init(this);
@@ -62,8 +62,8 @@ void draw() {
       mask.draw();
 
       rectMode(CORNER);
-      character.draw();
-      helper.draw();
+      character.update();
+      helper.update();
 
 
       if (keyPressed) {
@@ -71,7 +71,8 @@ void draw() {
         if (key == ' ') {
           frameRate(40);
           size(600, 800);
-          m = new Maze(13, width/2+15, height/2+50, 550, 700);
+          
+          m = new Maze(13, width/2+15, height/2 -20 , 550, 700);
           m.generateMaze(5, 5, m);
 
           Fisica.init(this);
@@ -100,17 +101,17 @@ void draw() {
       world.step();
       world.draw(this);
       rectMode(CORNER);
-      character.draw();
-      helper.draw();
+      character.update();
+      helper.update();
       if (character.fuel <= 0) {
         fill(255);
         textSize(50);
-        text("GURL, YOU LOSE !!!!\n press SPACE to restart", width/2, height/2);
+        text("GURL, YOU STARVED !!!!\n press SPACE to restart", width/2, height/2);
       }
       if (character.player.getY() >= height-3 || character.player.getX() <= 30) {
         fill(255);
         textSize(50); 
-        text("YOU WIN !!!!\n SPACE to restart", width/2, height/2);
+        text("HANSEL IS HOME AGAIN!\n press SPACE to restart", width/2, height/2);
       }
     }
   }

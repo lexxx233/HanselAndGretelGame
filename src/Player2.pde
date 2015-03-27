@@ -10,12 +10,20 @@ class Player2{
      
   }
   
-  void draw(){
-    fill(100);
-    rect(30, 24, 200*2.75, 12);
-    fill(0, 147, 207);
-    noStroke();
-    rect(30, 24, fuel*2.75, 12);
+  void update(){
+    if(fuel > 0){
+      noFill();
+      stroke(0, 147, 207, 255 * (1 - (200 - fuel)/200));
+      ellipseMode(RADIUS);
+      strokeWeight(20);
+      ellipse(mouseX, mouseY, 120, 120);
+      strokeWeight(10);
+      ellipse(mouseX, mouseY, 120, 120);
+      strokeWeight(5);
+      ellipse(mouseX, mouseY, 120, 120);
+      strokeWeight(2.5);
+      ellipse(mouseX, mouseY, 120, 120);
+    }
   }
   
   void mouseMoved(){
