@@ -52,7 +52,6 @@ void draw() {
   }
 
   if (keyPressed) {
-    character.keyPressed();
     if (key == ' ') {
       frameRate(40);
       size(600, 800);
@@ -70,6 +69,7 @@ void draw() {
       endFlag = false;
     }
   }
+
   if (!titleFlag) {
     if (!endFlag) {
       background(35);
@@ -113,6 +113,7 @@ void draw() {
       }
     }
   }
+
   for (int i = 0; i < snow.length; i++) {
     snow[i].y += 0.75;
     snow[i].x -= 0.5;
@@ -127,6 +128,17 @@ void draw() {
   }
 }
 
+void keyPressed() {
+  if (!titleFlag) {
+    character.keyPressed();
+  }
+}
+
+void keyReleased() {
+  if (!titleFlag) {
+    character.keyReleased();
+  }
+}
 void mouseMoved() {
   helper.mouseMoved();
 }

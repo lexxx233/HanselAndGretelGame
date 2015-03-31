@@ -1,9 +1,10 @@
 class Player {
-  //draw attributes
   float x = 515;
   float y = 490;
   FCircle player;
   float fuel = 200;
+
+  boolean[] keys;
 
   Player() {
     player = new FCircle(30);
@@ -14,6 +15,10 @@ class Player {
     player.setGrabbable(false);
     player.setStrokeWeight(0);
     player.setFill(244, 76, 0);
+    keys = new boolean[3];
+    keys[0] = false; //up
+    keys[1] = false; //left
+    keys[2] = false; //right
     HanselandGretel.world.add(player);
   }
 
@@ -21,33 +26,43 @@ class Player {
     player.setFill(244, 76, 0, 255 * (1 - (200 - fuel)/220));
     //Self maintenance fuel depletion
     fuel -= 0.0075;
-    fuel = constrain(fuel, 0, 200);    
+    fuel = constrain(fuel, 0, 200);
+
+    if (keys[0] == true && fuel > 0) {
+      player.addImpulse(0, -4);
+      fuel -= 0.2;
+    }
+    if (keys[1] == true && fuel > 0) {
+      player.addImpulse(-4, 0);
+      fuel -= 0.075;
+    }
+    if (keys[2] == true && fuel > 0) {
+      player.addImpulse(4, 0);
+      fuel -= 0.075;
+    }
   }
 
   void keyPressed() {
-    int savedTime = 0;
     if (keyCode == UP) {
-      if (fuel > 0 && player.getForceY() > -10) {
-        player.addImpulse(0, -4);
-        fuel -= 0.3;
-        savedTime = millis();
-      } else {
-        if (millis() - savedTime > 1000) {
-          player.resetForces();
-        }
-      }
+      keys[0] = true;
     }
     if (keyCode == LEFT) {
-      if (fuel > 0) {
-        player.addImpulse(-4, 0);
-        fuel -= 0.1;
-      }
+      keys[1] = true;
     }
     if (keyCode == RIGHT) {
-      if (fuel > 0) {
-        player.addImpulse(4, 0);
-        fuel -= 0.1;
-      }
+      keys[2] = true;
+    }
+  }
+
+  void keyReleased() {
+    if (keyCode == UP) {
+      keys[0] = false;
+    }
+    if (keyCode == LEFT) {
+      keys[1] = false;
+    }
+    if (keyCode == RIGHT) {
+      keys[2] = false;
     }
   }
 }

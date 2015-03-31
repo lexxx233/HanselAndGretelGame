@@ -13,15 +13,15 @@ class Player2{
   void update(){
     if(fuel > 0){
       noFill();
-      stroke(0, 147, 207, 255 * (1 - (200 - fuel)/200));
+      stroke(0, 147, 207, 255 * (1 - (200 - (fuel-20))/200));
       ellipseMode(RADIUS);
-      strokeWeight(20);
+      strokeWeight(15);
       ellipse(mouseX, mouseY, 120, 120);
-      strokeWeight(10);
+      strokeWeight(7.5);
       ellipse(mouseX, mouseY, 120, 120);
-      strokeWeight(5);
+      strokeWeight(3.75);
       ellipse(mouseX, mouseY, 120, 120);
-      strokeWeight(2.5);
+      strokeWeight(1.25);
       ellipse(mouseX, mouseY, 120, 120);
     }
   }
